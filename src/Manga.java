@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 class Manga extends Book {
 
-    static private ArrayList<Manga> mangas;
+    static private ArrayList<Manga> mangas = new ArrayList<Manga>();
 static private int currentMangaNumber;
 private String publisher;
 private String demographic;
@@ -18,14 +18,9 @@ private int volumes;
         currentMangaNumber = 0;
     }
 
-    static ArrayList<Manga> readManga() {
-        if (mangas != null) {
-            return mangas;
-        }
-        mangas = new ArrayList<Manga>();
+    static ArrayList<Manga> readManga(File mangaDataFile) {
         try {
             // scan data file line-by-line
-            File mangaDataFile = new File("Manga data");
             Scanner scanner = new Scanner(mangaDataFile);
             int ranking = 1;
             while (scanner.hasNextLine()){
@@ -54,19 +49,13 @@ private int volumes;
 
     }
 
-    static void describeManga() {
-       if (mangas == null) {
-
-           readManga();
-       }
-
-        for(int i = 0; i < mangas.size(); i++) {
-            mangas.get(i).describe();
-        }
-   }
 static Manga getPrev() {
-       readManga();
-       if (currentMangaNumber == 0) {
+    if (mangas.size() == 0) {
+        return null;
+    }
+
+
+    if (currentMangaNumber == 0) {
            currentMangaNumber = mangas.size() - 1;
        } else {
            currentMangaNumber = currentMangaNumber - 1;
@@ -75,7 +64,10 @@ static Manga getPrev() {
 }
 
     static Manga getNext() {
-        readManga();
+        if (mangas.size() == 0) {
+            return null;
+        }
+
         if (currentMangaNumber ==  mangas.size()-1){
             currentMangaNumber = 0;
         } else {

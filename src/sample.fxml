@@ -18,6 +18,7 @@
                <children>
                   <Button fx:id="previousButton" mnemonicParsing="false" onAction="#previousButtonPressed" text="Prev" />
                   <Button fx:id="nextButton" mnemonicParsing="false" onAction="#nextButtonPressed" text="Next" />
+                  <Button fx:id="ImportButton" mnemonicParsing="false" onAction="#importButtonPressed" text="Import" />
                </children>
             </HBox>
          </children>
